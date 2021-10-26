@@ -13,7 +13,8 @@ class ContainerTest {
     Container container;
     @BeforeEach
     void setUp() {
-        container = new Container();
+        container = Container.getInstance();
+        container.deleteAll();
     }
 
     @AfterEach

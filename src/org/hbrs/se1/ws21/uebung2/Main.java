@@ -2,31 +2,32 @@ package org.hbrs.se1.ws21.uebung2;
 
 import org.hbrs.se1.ws21.uebung2.memberklassen.FirstClassMember;
 import org.hbrs.se1.ws21.uebung2.memberklassen.SecondClassMember;
+import org.hbrs.se1.ws21.uebung3.persistence.PersistenceException;
+
+import java.util.List;
 
 public class Main {
+    // Diverse Member-Objekte erzeugen,
+    // in den Conatainer hinzufügen,
+    // Diese wieder auslesen,
+    // In MemberView zur Ausgabe übergeben
 
     public static void main(String[] args) {
-        Container container = new Container();
 
-        Member member1 = new FirstClassMember(1);
-        Member member2 = new SecondClassMember(2);
-        Member member3 = new FirstClassMember(3);
-        Member member4 = new SecondClassMember(3);
+        Container container = Container.getInstance();
+        container.deleteAll();
 
         try {
-            container.addMember(member1);
-            container.addMember(member2);
-            container.addMember(member3);
-            //container.addMember(member4);
-            System.out.println("Container size: "+ container.size());
+            container.addMember(new FirstClassMember(1));
+            container.addMember(new SecondClassMember(2));
+            container.addMember(new FirstClassMember(3));
         } catch (ContainerException e) {
             e.printStackTrace();
         }
-        container.deleteMember(3);
-        System.out.println("Container size: "+ container.size());
 
+        MemberView mV = new MemberView();
+        mV.dump(container.getCurrentList());
 
-        container.dump();
 
     }
 }
